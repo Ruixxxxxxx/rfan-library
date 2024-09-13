@@ -1,16 +1,50 @@
+<script setup>
+
+// import { getAuth, signOut } from 'firebase/auth';
+import { isAuthenticated } from '@/router';
+import { getAuth } from 'firebase/auth';
+import { useRouter } from 'vue-router';
+import { signOut } from 'firebase/auth';
+ 
+const router = useRouter();
+// const auth = getAuth();
+
+const logout = () => {
+  signOut(getAuth()).then(() => {
+    console.log(isAuthenticated.value);
+    alert('Logout successful')
+    isAuthenticated.value = null
+    router.push('/Firelogin')
+  }).catch((error) => {
+    alert(error.code)
+  })
+}
+</script>
+
+
 <template>
-  <!-- Using Bootstrap's Header template (starter code) -->
-  <!-- https://getbootstrap.com/docs/5.0/examples/headers/ -->
   <div class="container">
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
-        <li class="nav-item">
+        <li class="nav-item" v-if="isAuthenticated">
           <router-link to="/" class="nav-link" active-class="active" aria-current="page"
-            >Home (Week 5)</router-link
+            >Home</router-link
           >
         </li>
         <li class="nav-item">
-          <router-link to="/about" class="nav-link" active-class="active">About</router-link>
+          <router-link to="/addbook" class="nav-link" active-class="active">Add Book</router-link>
+        </li>
+        <li class="nav-item" v-if="isAuthenticated && isAuthenticated.role === 'admin'">
+          <router-link to="/admin" class="nav-link" active-class="active">Admin</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/Firelogin" class="nav-link" active-class="active">Firebase Login</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/FireRegister" class="nav-link" active-class="active">Firebase Register</router-link>
+        </li>
+        <li class="nav-item" v-if="isAuthenticated">
+          <button class="nav-link" @click="logout">Logout</button>
         </li>
       </ul>
     </header>

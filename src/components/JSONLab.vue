@@ -66,9 +66,9 @@ const topSellers = computed(() => {
 })
 
 // <!-- Activity 13: Toggle the message visibility when the button is clicked. -->
-const toggleMessage = () => {
-  showMessage.value = !showMessage.value
-}
+// const toggleMessage = () => {
+//   showMessage.value = !showMessage.value
+// }
 </script>
 
 <!-- JSONLab.vue -->

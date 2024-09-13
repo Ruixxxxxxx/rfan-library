@@ -19,3 +19,5 @@ app.use(router)
 // app.component('Column', Column)
 
 app.mount('#app')
+
+
