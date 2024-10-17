@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Book Count.</h1>
+    <h1>Book Count</h1>
     <button @click="getBookCount">Get Book Count</button>
     <p v-if="count !== null">Total number of Books: {{ count }}</p>
     <p v-if="error">{{ error }}</p>
