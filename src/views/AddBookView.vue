@@ -39,9 +39,10 @@
 
 <script>
 import { ref } from 'vue';
-import db  from '../firebase/init.js';
-import { collection, addDoc, doc, deleteDoc, getDocs, where, updateDoc, query } from 'firebase/firestore';
+import db from '../firebase/init.js';
+import { collection, doc, deleteDoc, getDocs, where, updateDoc, query } from 'firebase/firestore';
 import BookList from '../components/BookList.vue';
+import axios from 'axios';
 
 export default {
     setup() {
@@ -57,8 +58,8 @@ export default {
                 if (isNaN(isbnNumber)) {
                     alert('ISBN must be a valid number');
                     return;
-                }
-                await addDoc(collection(db, 'books'), {
+                } 
+                await axios.post('https://addbook-n2vk4rks6q-uc.a.run.app', {
                     isbn: isbnNumber,
                     name: name.value
                 });
@@ -67,6 +68,7 @@ export default {
                 alert('Book added successfully');
             } catch (error) {
                 console.error('Error adding book: ', error);
+                alert('Error adding book');
             }
         };
 
