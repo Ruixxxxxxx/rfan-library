@@ -56,7 +56,7 @@
       //Get the current weather icon using the API link
       iconUrl() {
         return this.weatherData
-          ? `http://api.openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`
+          ? `https://api.openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`
           : null;
       },
     },
@@ -94,11 +94,11 @@
       async searchByCity() {
       try {
         const response = await axios.get (
-          `http://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=${apikey}`
+          `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=${apikey}`
         );
         this.weatherData = response.data;
         this.temperature = Math.floor(this.weatherData.main.temp - 273);
-        this.iconUrl = `http://api.openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`;
+        this.iconUrl = `https://api.openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`;
         } catch (error) {
             console.error("Error fetching weather data:", error);
             }
